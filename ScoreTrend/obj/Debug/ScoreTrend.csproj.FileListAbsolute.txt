@@ -1,0 +1,10 @@
+C:\Users\Christian\AppData\Local\Temporary Projects\ScoreTrend\bin\Debug\ScoreTrend.exe.config
+C:\Users\Christian\Documents\MySeminoleStateFolders\CaseStudyInBusinessProgramming\ScoreTrend\ScoreTrend\bin\Debug\ScoreTrend.exe.config
+C:\Users\Christian\Documents\MySeminoleStateFolders\CaseStudyInBusinessProgramming\ScoreTrend\ScoreTrend\bin\Debug\ScoreTrend.exe
+C:\Users\Christian\Documents\MySeminoleStateFolders\CaseStudyInBusinessProgramming\ScoreTrend\ScoreTrend\bin\Debug\ScoreTrend.pdb
+C:\Users\Christian\Documents\MySeminoleStateFolders\CaseStudyInBusinessProgramming\ScoreTrend\ScoreTrend\obj\Debug\ScoreTrend.HomeForm.resources
+C:\Users\Christian\Documents\MySeminoleStateFolders\CaseStudyInBusinessProgramming\ScoreTrend\ScoreTrend\obj\Debug\ScoreTrend.Properties.Resources.resources
+C:\Users\Christian\Documents\MySeminoleStateFolders\CaseStudyInBusinessProgramming\ScoreTrend\ScoreTrend\obj\Debug\ScoreTrend.csproj.GenerateResource.Cache
+C:\Users\Christian\Documents\MySeminoleStateFolders\CaseStudyInBusinessProgramming\ScoreTrend\ScoreTrend\obj\Debug\ScoreTrend.exe
+C:\Users\Christian\Documents\MySeminoleStateFolders\CaseStudyInBusinessProgramming\ScoreTrend\ScoreTrend\obj\Debug\ScoreTrend.pdb
+C:\Users\Christian\Documents\MySeminoleStateFolders\CaseStudyInBusinessProgramming\ScoreTrend\ScoreTrend\obj\Debug\ScoreTrend.csprojResolveAssemblyReference.cache
