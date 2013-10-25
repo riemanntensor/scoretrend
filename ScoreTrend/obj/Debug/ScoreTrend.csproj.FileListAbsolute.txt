@@ -15,5 +15,6 @@ C:\Users\Christian\Documents\GitHub\scoretrend\ScoreTrend\obj\Debug\ScoreTrend.P
 C:\Users\Christian\Documents\GitHub\scoretrend\ScoreTrend\obj\Debug\ScoreTrend.csproj.GenerateResource.Cache
 C:\Users\Christian\Documents\GitHub\scoretrend\ScoreTrend\bin\Debug\ScoreTrend.exe
 C:\Users\Christian\Documents\GitHub\scoretrend\ScoreTrend\bin\Debug\ScoreTrend.pdb
-C:\Users\Christian\Documents\GitHub\scoretrend\ScoreTrend\obj\Debug\ScoreTrend.HomeForm.resources
 C:\Users\Christian\Documents\GitHub\scoretrend\ScoreTrend\obj\Debug\ScoreTrend.csprojResolveAssemblyReference.cache
+C:\Users\Christian\Documents\GitHub\scoretrend\ScoreTrend\obj\Debug\ScoreTrend.Dashboard.resources
+C:\Users\Christian\Documents\GitHub\scoretrend\ScoreTrend\obj\Debug\ScoreTrend.Login.resources
