@@ -28,5 +28,17 @@ namespace ScoreTrend
             session.Show();
             this.Hide();
         }
+
+        private void lnkStartNewUser_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            NewUser newuser = new NewUser();
+            newuser.Show();
+            this.Hide();
+        }
+
+        private void btnExit_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

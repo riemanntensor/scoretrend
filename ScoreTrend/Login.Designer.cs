@@ -49,6 +49,9 @@
             this.btnLogin = new System.Windows.Forms.Button();
             this.lblNewUser = new System.Windows.Forms.Label();
             this.lnkStartNewUser = new System.Windows.Forms.LinkLabel();
+            this.lblLine = new System.Windows.Forms.Label();
+            this.btnExit = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -83,7 +86,7 @@
             this.helpToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(684, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(663, 24);
             this.menuStrip1.TabIndex = 2;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -219,12 +222,46 @@
             this.lnkStartNewUser.TabIndex = 12;
             this.lnkStartNewUser.TabStop = true;
             this.lnkStartNewUser.Text = "Start Here!";
+            this.lnkStartNewUser.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkStartNewUser_LinkClicked);
+            // 
+            // lblLine
+            // 
+            this.lblLine.AutoSize = true;
+            this.lblLine.Location = new System.Drawing.Point(351, 249);
+            this.lblLine.Name = "lblLine";
+            this.lblLine.Size = new System.Drawing.Size(9, 182);
+            this.lblLine.TabIndex = 13;
+            this.lblLine.Text = "|\r\n|\r\n|\r\n|\r\n|\r\n|\r\n|\r\n|\r\n|\r\n|\r\n|\r\n|\r\n|\r\n|";
+            // 
+            // btnExit
+            // 
+            this.btnExit.Location = new System.Drawing.Point(576, 462);
+            this.btnExit.Name = "btnExit";
+            this.btnExit.Size = new System.Drawing.Size(75, 23);
+            this.btnExit.TabIndex = 14;
+            this.btnExit.Text = "Exit";
+            this.btnExit.UseVisualStyleBackColor = true;
+            this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(374, 286);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(277, 80);
+            this.label1.TabIndex = 15;
+            this.label1.Text = "Start using ScoreTrend and enter\r\nall of your team statistics or view\r\nyour favor" +
+    "ite player information\r\ntoday!";
             // 
             // Login
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(684, 518);
+            this.ClientSize = new System.Drawing.Size(663, 497);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.btnExit);
+            this.Controls.Add(this.lblLine);
             this.Controls.Add(this.lnkStartNewUser);
             this.Controls.Add(this.lblNewUser);
             this.Controls.Add(this.btnLogin);
@@ -269,6 +306,9 @@
         private System.Windows.Forms.ToolStripMenuItem newTeamToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem newUserToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem exitScoreTrendToolStripMenuItem;
+        private System.Windows.Forms.Label lblLine;
+        private System.Windows.Forms.Button btnExit;
+        private System.Windows.Forms.Label label1;
     }
 }
 
