@@ -18,3 +18,4 @@ C:\Users\Christian\Documents\GitHub\scoretrend\ScoreTrend\bin\Debug\ScoreTrend.p
 C:\Users\Christian\Documents\GitHub\scoretrend\ScoreTrend\obj\Debug\ScoreTrend.csprojResolveAssemblyReference.cache
 C:\Users\Christian\Documents\GitHub\scoretrend\ScoreTrend\obj\Debug\ScoreTrend.Dashboard.resources
 C:\Users\Christian\Documents\GitHub\scoretrend\ScoreTrend\obj\Debug\ScoreTrend.Login.resources
+C:\Users\Christian\Documents\GitHub\scoretrend\ScoreTrend\obj\Debug\ScoreTrend.NewUser.resources
