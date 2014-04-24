@@ -17,16 +17,30 @@ namespace ScoreTrend
             InitializeComponent();
         }
         
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
-            
-            this.Hide();
+            if (MessageBox.Show("Would you like to Exit ScoreTrend?", "", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            {
+                Close();
+                Application.Exit();
+            }
         }
+
+        private void btnOK_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void NewUser_Load(object sender, EventArgs e)
+        {
+            
+
+        }
+
+       
+        
+        
         
     }
 }

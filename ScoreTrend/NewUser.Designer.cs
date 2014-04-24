@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(NewUser));
             this.lblTitle = new System.Windows.Forms.Label();
             this.lblTitleDesc = new System.Windows.Forms.Label();
@@ -41,14 +42,20 @@
             this.lblAreYouTheAuth = new System.Windows.Forms.Label();
             this.radYesAuth = new System.Windows.Forms.RadioButton();
             this.radNoAuth = new System.Windows.Forms.RadioButton();
-            this.cmbPickYourLeage = new System.Windows.Forms.ComboBox();
-            this.cmbPickYourTeam = new System.Windows.Forms.ComboBox();
+            this.cboPickYourLeague = new System.Windows.Forms.ComboBox();
             this.lblUsername = new System.Windows.Forms.Label();
             this.lblPassword = new System.Windows.Forms.Label();
             this.txtUsername = new System.Windows.Forms.TextBox();
             this.txtPassword = new System.Windows.Forms.TextBox();
             this.lblErrMessageNewUser = new System.Windows.Forms.Label();
+            this.cboPickYourTeam = new System.Windows.Forms.ComboBox();
+            this.leagueBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.teamBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.userBindingSource = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.leagueBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.teamBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.userBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // lblTitle
@@ -128,6 +135,7 @@
             this.btnOK.TabIndex = 8;
             this.btnOK.Text = "OK";
             this.btnOK.UseVisualStyleBackColor = true;
+            this.btnOK.Click += new System.EventHandler(this.btnOK_Click);
             // 
             // btnCancel
             // 
@@ -173,22 +181,16 @@
             this.radNoAuth.Text = "No.";
             this.radNoAuth.UseVisualStyleBackColor = true;
             // 
-            // cmbPickYourLeage
+            // cboPickYourLeague
             // 
-            this.cmbPickYourLeage.FormattingEnabled = true;
-            this.cmbPickYourLeage.Location = new System.Drawing.Point(363, 271);
-            this.cmbPickYourLeage.Name = "cmbPickYourLeage";
-            this.cmbPickYourLeage.Size = new System.Drawing.Size(121, 21);
-            this.cmbPickYourLeage.TabIndex = 13;
-            this.cmbPickYourLeage.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
-            // 
-            // cmbPickYourTeam
-            // 
-            this.cmbPickYourTeam.FormattingEnabled = true;
-            this.cmbPickYourTeam.Location = new System.Drawing.Point(363, 305);
-            this.cmbPickYourTeam.Name = "cmbPickYourTeam";
-            this.cmbPickYourTeam.Size = new System.Drawing.Size(121, 21);
-            this.cmbPickYourTeam.TabIndex = 14;
+            this.cboPickYourLeague.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.leagueBindingSource, "name", true));
+            this.cboPickYourLeague.DisplayMember = "name";
+            this.cboPickYourLeague.FormattingEnabled = true;
+            this.cboPickYourLeague.Location = new System.Drawing.Point(363, 271);
+            this.cboPickYourLeague.Name = "cboPickYourLeague";
+            this.cboPickYourLeague.Size = new System.Drawing.Size(121, 21);
+            this.cboPickYourLeague.TabIndex = 13;
+            this.cboPickYourLeague.ValueMember = "leagueid";
             // 
             // lblUsername
             // 
@@ -212,6 +214,7 @@
             // 
             // txtUsername
             // 
+            this.txtUsername.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.userBindingSource, "username", true));
             this.txtUsername.Location = new System.Drawing.Point(363, 365);
             this.txtUsername.Name = "txtUsername";
             this.txtUsername.Size = new System.Drawing.Size(120, 20);
@@ -219,6 +222,7 @@
             // 
             // txtPassword
             // 
+            this.txtPassword.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.userBindingSource, "password", true));
             this.txtPassword.Location = new System.Drawing.Point(363, 395);
             this.txtPassword.Name = "txtPassword";
             this.txtPassword.PasswordChar = '*';
@@ -237,18 +241,39 @@
             this.lblErrMessageNewUser.Text = "***Error Message and Info Message Goes Here...";
             this.lblErrMessageNewUser.Visible = false;
             // 
+            // cboPickYourTeam
+            // 
+            this.cboPickYourTeam.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.teamBindingSource, "name", true));
+            this.cboPickYourTeam.FormattingEnabled = true;
+            this.cboPickYourTeam.Location = new System.Drawing.Point(363, 302);
+            this.cboPickYourTeam.Name = "cboPickYourTeam";
+            this.cboPickYourTeam.Size = new System.Drawing.Size(121, 21);
+            this.cboPickYourTeam.TabIndex = 20;
+            // 
+            // leagueBindingSource
+            // 
+            this.leagueBindingSource.DataSource = typeof(ScoreTrend.league);
+            // 
+            // teamBindingSource
+            // 
+            this.teamBindingSource.DataSource = typeof(ScoreTrend.team);
+            // 
+            // userBindingSource
+            // 
+            this.userBindingSource.DataSource = typeof(ScoreTrend.user);
+            // 
             // NewUser
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(603, 519);
+            this.Controls.Add(this.cboPickYourTeam);
             this.Controls.Add(this.lblErrMessageNewUser);
             this.Controls.Add(this.txtPassword);
             this.Controls.Add(this.txtUsername);
             this.Controls.Add(this.lblPassword);
             this.Controls.Add(this.lblUsername);
-            this.Controls.Add(this.cmbPickYourTeam);
-            this.Controls.Add(this.cmbPickYourLeage);
+            this.Controls.Add(this.cboPickYourLeague);
             this.Controls.Add(this.radNoAuth);
             this.Controls.Add(this.radYesAuth);
             this.Controls.Add(this.lblAreYouTheAuth);
@@ -263,7 +288,11 @@
             this.Controls.Add(this.lblTitle);
             this.Name = "NewUser";
             this.Text = "New User Setup";
+            this.Load += new System.EventHandler(this.NewUser_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.leagueBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.teamBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.userBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -283,12 +312,17 @@
         private System.Windows.Forms.Label lblAreYouTheAuth;
         private System.Windows.Forms.RadioButton radYesAuth;
         private System.Windows.Forms.RadioButton radNoAuth;
-        private System.Windows.Forms.ComboBox cmbPickYourLeage;
-        private System.Windows.Forms.ComboBox cmbPickYourTeam;
+        private System.Windows.Forms.ComboBox cboPickYourLeague;
         private System.Windows.Forms.Label lblUsername;
         private System.Windows.Forms.Label lblPassword;
         private System.Windows.Forms.TextBox txtUsername;
         private System.Windows.Forms.TextBox txtPassword;
         private System.Windows.Forms.Label lblErrMessageNewUser;
+        private System.Windows.Forms.ComboBox cboPickYourTeam;
+        private System.Windows.Forms.BindingSource leagueBindingSource;
+        private System.Windows.Forms.BindingSource userBindingSource;
+        private System.Windows.Forms.BindingSource teamBindingSource;
+        
+        
     }
 }

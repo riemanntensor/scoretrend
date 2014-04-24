@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Login));
             this.lblTitle = new System.Windows.Forms.Label();
             this.lblTitleDesc = new System.Windows.Forms.Label();
@@ -52,8 +53,11 @@
             this.lblLine = new System.Windows.Forms.Label();
             this.btnExit = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
+            this.lblErrorLogin = new System.Windows.Forms.Label();
+            this.userBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.userBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // lblTitle
@@ -124,6 +128,7 @@
             this.exitScoreTrendToolStripMenuItem.Name = "exitScoreTrendToolStripMenuItem";
             this.exitScoreTrendToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
             this.exitScoreTrendToolStripMenuItem.Text = "Exit ScoreTrend";
+            this.exitScoreTrendToolStripMenuItem.Click += new System.EventHandler(this.exitScoreTrendToolStripMenuItem_Click);
             // 
             // viewToolStripMenuItem
             // 
@@ -181,6 +186,7 @@
             // 
             // txtUsername
             // 
+            this.txtUsername.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.userBindingSource, "username", true));
             this.txtUsername.Location = new System.Drawing.Point(120, 276);
             this.txtUsername.Name = "txtUsername";
             this.txtUsername.Size = new System.Drawing.Size(100, 20);
@@ -188,6 +194,7 @@
             // 
             // txtPassword
             // 
+            this.txtPassword.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.userBindingSource, "password", true));
             this.txtPassword.Location = new System.Drawing.Point(120, 313);
             this.txtPassword.Name = "txtPassword";
             this.txtPassword.PasswordChar = '*';
@@ -196,7 +203,7 @@
             // 
             // btnLogin
             // 
-            this.btnLogin.Location = new System.Drawing.Point(59, 402);
+            this.btnLogin.Location = new System.Drawing.Point(62, 380);
             this.btnLogin.Name = "btnLogin";
             this.btnLogin.Size = new System.Drawing.Size(75, 23);
             this.btnLogin.TabIndex = 9;
@@ -254,11 +261,27 @@
             this.label1.Text = "Start using ScoreTrend and enter\r\nall of your team statistics or view\r\nyour favor" +
     "ite player information\r\ntoday!";
             // 
+            // lblErrorLogin
+            // 
+            this.lblErrorLogin.AutoSize = true;
+            this.lblErrorLogin.ForeColor = System.Drawing.Color.Red;
+            this.lblErrorLogin.Location = new System.Drawing.Point(55, 410);
+            this.lblErrorLogin.Name = "lblErrorLogin";
+            this.lblErrorLogin.Size = new System.Drawing.Size(201, 78);
+            this.lblErrorLogin.TabIndex = 16;
+            this.lblErrorLogin.Text = resources.GetString("lblErrorLogin.Text");
+            // 
+            // userBindingSource
+            // 
+            this.userBindingSource.DataSource = typeof(ScoreTrend.user);
+            // 
             // Login
             // 
+            this.AcceptButton = this.btnLogin;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(663, 497);
+            this.Controls.Add(this.lblErrorLogin);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btnExit);
             this.Controls.Add(this.lblLine);
@@ -279,6 +302,7 @@
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.userBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -309,6 +333,8 @@
         private System.Windows.Forms.Label lblLine;
         private System.Windows.Forms.Button btnExit;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lblErrorLogin;
+        private System.Windows.Forms.BindingSource userBindingSource;
     }
 }
 

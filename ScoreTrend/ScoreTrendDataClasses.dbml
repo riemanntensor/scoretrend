@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="scoretrend_db" Class="ScoreTrendDataClassesDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=gwnfeltpgk.database.windows.net;Initial Catalog=scoretrend_db;Persist Security Info=True;User ID=scoretrend" SettingsObjectName="ScoreTrend.Properties.Settings" SettingsPropertyName="scoretrend_dbConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.leagues" Member="leagues">
+    <Type Name="league">
+      <Column Name="leagueid" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="name" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="city" Type="System.String" DbType="NVarChar(15) NOT NULL" CanBeNull="false" />
+      <Column Name="state" Type="System.String" DbType="NVarChar(20) NOT NULL" CanBeNull="false" />
+      <Association Name="league_user" Member="users" ThisKey="leagueid" OtherKey="leagueid" Type="user" />
+      <Association Name="league_team" Member="teams" ThisKey="leagueid" OtherKey="leagueid" Type="team" />
+    </Type>
+  </Table>
+  <Table Name="dbo.players" Member="players">
+    <Type Name="player">
+      <Column Name="firstname" Type="System.String" DbType="NVarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="lastname" Type="System.String" DbType="NVarChar(15) NOT NULL" CanBeNull="false" />
+      <Column Name="teamid" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="playerid" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Association Name="player_user" Member="users" ThisKey="playerid" OtherKey="playerid" Type="user" Cardinality="One" />
+      <Association Name="player_statistic" Member="statistics" ThisKey="playerid" OtherKey="playerid" Type="statistic" Cardinality="One" />
+      <Association Name="team_player" Member="team" ThisKey="teamid" OtherKey="teamid" Type="team" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.[statistics]" Member="statistics">
+    <Type Name="statistic">
+      <Column Name="playerid" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="runs" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="player_statistic" Member="player" ThisKey="playerid" OtherKey="playerid" Type="player" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.teams" Member="teams">
+    <Type Name="team">
+      <Column Name="leagueid" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="name" Type="System.String" DbType="NVarChar(30) NOT NULL" CanBeNull="false" />
+      <Column Name="teamid" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Association Name="team_player" Member="players" ThisKey="teamid" OtherKey="teamid" Type="player" />
+      <Association Name="league_team" Member="league" ThisKey="leagueid" OtherKey="leagueid" Type="league" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.users" Member="users">
+    <Type Name="user">
+      <Column Name="username" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="password" Type="System.String" DbType="NVarChar(15) NOT NULL" CanBeNull="false" />
+      <Column Name="teamid" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="leagueid" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="playerid" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="userid" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Association Name="league_user" Member="league" ThisKey="leagueid" OtherKey="leagueid" Type="league" IsForeignKey="true" />
+      <Association Name="player_user" Member="player" ThisKey="playerid" OtherKey="playerid" Type="player" IsForeignKey="true" />
+    </Type>
+  </Table>
+</Database>

@@ -9,13 +9,12 @@ C:\Users\Christian\Documents\MySeminoleStateFolders\CaseStudyInBusinessProgrammi
 C:\Users\Christian\Documents\MySeminoleStateFolders\CaseStudyInBusinessProgramming\ScoreTrend\ScoreTrend\obj\Debug\ScoreTrend.pdb
 C:\Users\Christian\Documents\MySeminoleStateFolders\CaseStudyInBusinessProgramming\ScoreTrend\ScoreTrend\obj\Debug\ScoreTrend.csprojResolveAssemblyReference.cache
 C:\Users\Christian\Documents\GitHub\scoretrend\ScoreTrend\bin\Debug\ScoreTrend.exe.config
-C:\Users\Christian\Documents\GitHub\scoretrend\ScoreTrend\obj\Debug\ScoreTrend.exe
-C:\Users\Christian\Documents\GitHub\scoretrend\ScoreTrend\obj\Debug\ScoreTrend.pdb
-C:\Users\Christian\Documents\GitHub\scoretrend\ScoreTrend\obj\Debug\ScoreTrend.Properties.Resources.resources
-C:\Users\Christian\Documents\GitHub\scoretrend\ScoreTrend\obj\Debug\ScoreTrend.csproj.GenerateResource.Cache
 C:\Users\Christian\Documents\GitHub\scoretrend\ScoreTrend\bin\Debug\ScoreTrend.exe
 C:\Users\Christian\Documents\GitHub\scoretrend\ScoreTrend\bin\Debug\ScoreTrend.pdb
-C:\Users\Christian\Documents\GitHub\scoretrend\ScoreTrend\obj\Debug\ScoreTrend.csprojResolveAssemblyReference.cache
 C:\Users\Christian\Documents\GitHub\scoretrend\ScoreTrend\obj\Debug\ScoreTrend.Dashboard.resources
 C:\Users\Christian\Documents\GitHub\scoretrend\ScoreTrend\obj\Debug\ScoreTrend.Login.resources
 C:\Users\Christian\Documents\GitHub\scoretrend\ScoreTrend\obj\Debug\ScoreTrend.NewUser.resources
+C:\Users\Christian\Documents\GitHub\scoretrend\ScoreTrend\obj\Debug\ScoreTrend.Properties.Resources.resources
+C:\Users\Christian\Documents\GitHub\scoretrend\ScoreTrend\obj\Debug\ScoreTrend.csproj.GenerateResource.Cache
+C:\Users\Christian\Documents\GitHub\scoretrend\ScoreTrend\obj\Debug\ScoreTrend.exe
+C:\Users\Christian\Documents\GitHub\scoretrend\ScoreTrend\obj\Debug\ScoreTrend.pdb

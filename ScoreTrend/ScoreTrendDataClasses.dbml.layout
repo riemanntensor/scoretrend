@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 8.5" name="ScoreTrendDataClasses">
+  <DataContextMoniker Name="/ScoreTrendDataClassesDataContext" />
+  <nestedChildShapes>
+    <classShape Id="b331a124-1611-4f94-9cdc-07925cb19f34" absoluteBounds="0.5, 0.5, 2, 1.5785953776041666">
+      <DataClassMoniker Name="/ScoreTrendDataClassesDataContext/league" />
+      <nestedChildShapes>
+        <elementListCompartment Id="9283f5d6-8e17-4fdd-8a3b-c06f86cf46c8" absoluteBounds="0.51500000000000012, 0.96, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="08888f0d-4271-4ca6-b2a2-7f69daf373e2" absoluteBounds="5.125, 2.75, 2, 1.5785953776041666">
+      <DataClassMoniker Name="/ScoreTrendDataClassesDataContext/player" />
+      <nestedChildShapes>
+        <elementListCompartment Id="638f4dcd-9f73-40d4-ae94-2a64e02604c5" absoluteBounds="5.14, 3.21, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="6f7d1bc7-5469-4569-87d2-6d6fc4cec6ad" absoluteBounds="2.125, 2.75, 2, 1.1939925130208331">
+      <DataClassMoniker Name="/ScoreTrendDataClassesDataContext/statistic" />
+      <nestedChildShapes>
+        <elementListCompartment Id="e6141b55-dcf5-446e-b6f1-7a05490a274c" absoluteBounds="2.14, 3.21, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="a248c278-b6ab-4780-b257-d2384236366f" absoluteBounds="3.875, 4.5, 2, 1.3862939453125">
+      <DataClassMoniker Name="/ScoreTrendDataClassesDataContext/team" />
+      <nestedChildShapes>
+        <elementListCompartment Id="e56d8de2-ba5a-47a8-8916-41b385f9e55a" absoluteBounds="3.8899999999999997, 4.96, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="bdf565bb-91b6-4584-bbdb-ef1d7b902943" absoluteBounds="3.5, 0.5, 2, 1.9631982421875">
+      <DataClassMoniker Name="/ScoreTrendDataClassesDataContext/user" />
+      <nestedChildShapes>
+        <elementListCompartment Id="3abeb361-4470-4398-9f2b-a025136adde6" absoluteBounds="3.5150000000000006, 0.96, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(2.5 : 1.28929768880208); (3.5 : 1.28929768880208)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/ScoreTrendDataClassesDataContext/league/league_user" />
+      <nodes>
+        <classShapeMoniker Id="b331a124-1611-4f94-9cdc-07925cb19f34" />
+        <classShapeMoniker Id="bdf565bb-91b6-4584-bbdb-ef1d7b902943" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(5.3125 : 2.75); (5.3125 : 2.4631982421875)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/ScoreTrendDataClassesDataContext/player/player_user" />
+      <nodes>
+        <classShapeMoniker Id="08888f0d-4271-4ca6-b2a2-7f69daf373e2" />
+        <classShapeMoniker Id="bdf565bb-91b6-4584-bbdb-ef1d7b902943" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(5.125 : 3.34699625651042); (4.125 : 3.34699625651042)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/ScoreTrendDataClassesDataContext/player/player_statistic" />
+      <nodes>
+        <classShapeMoniker Id="08888f0d-4271-4ca6-b2a2-7f69daf373e2" />
+        <classShapeMoniker Id="6f7d1bc7-5469-4569-87d2-6d6fc4cec6ad" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(1.28125 : 2.07859537760417); (1.28125 : 5.19314697265625); (3.875 : 5.19314697265625)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/ScoreTrendDataClassesDataContext/league/league_team" />
+      <nodes>
+        <classShapeMoniker Id="b331a124-1611-4f94-9cdc-07925cb19f34" />
+        <classShapeMoniker Id="a248c278-b6ab-4780-b257-d2384236366f" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(5.5 : 4.5); (5.5 : 4.32859537760417)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/ScoreTrendDataClassesDataContext/team/team_player" />
+      <nodes>
+        <classShapeMoniker Id="a248c278-b6ab-4780-b257-d2384236366f" />
+        <classShapeMoniker Id="08888f0d-4271-4ca6-b2a2-7f69daf373e2" />
+      </nodes>
+    </associationConnector>
+  </nestedChildShapes>
+</ordesignerObjectsDiagram>

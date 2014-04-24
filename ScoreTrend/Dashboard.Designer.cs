@@ -28,16 +28,24 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.lblTitle = new System.Windows.Forms.Label();
             this.lblTitleDesc = new System.Windows.Forms.Label();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
-            this.comboBox3 = new System.Windows.Forms.ComboBox();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.teamBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.cboPlayer = new System.Windows.Forms.ComboBox();
+            this.playerBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.pbxPlayer = new System.Windows.Forms.PictureBox();
+            this.btnDashExit = new System.Windows.Forms.Button();
+            this.cboLeagues = new System.Windows.Forms.ComboBox();
+            this.leagueBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.cboTeam = new System.Windows.Forms.ComboBox();
+            ((System.ComponentModel.ISupportInitialize)(this.teamBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.playerBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbxPlayer)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.leagueBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // lblTitle
@@ -61,15 +69,6 @@
             this.lblTitleDesc.Size = new System.Drawing.Size(147, 20);
             this.lblTitleDesc.TabIndex = 3;
             this.lblTitleDesc.Text = "Baseball Scorecard";
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Location = new System.Drawing.Point(70, 195);
-            this.pictureBox1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(173, 201);
-            this.pictureBox1.TabIndex = 4;
-            this.pictureBox1.TabStop = false;
             // 
             // label1
             // 
@@ -104,52 +103,103 @@
             this.label3.TabIndex = 7;
             this.label3.Text = "Player:";
             // 
-            // comboBox1
+            // teamBindingSource
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(127, 82);
-            this.comboBox1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(137, 23);
-            this.comboBox1.TabIndex = 8;
+            this.teamBindingSource.DataSource = typeof(ScoreTrend.team);
             // 
-            // comboBox2
+            // cboPlayer
             // 
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(353, 82);
-            this.comboBox2.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(160, 23);
-            this.comboBox2.TabIndex = 9;
+            this.cboPlayer.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.playerBindingSource, "lastname", true));
+            this.cboPlayer.DataSource = this.playerBindingSource;
+            this.cboPlayer.DisplayMember = "lastname";
+            this.cboPlayer.FormattingEnabled = true;
+            this.cboPlayer.Location = new System.Drawing.Point(600, 82);
+            this.cboPlayer.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.cboPlayer.Name = "cboPlayer";
+            this.cboPlayer.Size = new System.Drawing.Size(141, 23);
+            this.cboPlayer.TabIndex = 10;
+            this.cboPlayer.ValueMember = "lastname";
+            this.cboPlayer.Visible = false;
+            this.cboPlayer.SelectedIndexChanged += new System.EventHandler(this.cboPlayer_SelectedIndexChanged);
             // 
-            // comboBox3
+            // playerBindingSource
             // 
-            this.comboBox3.FormattingEnabled = true;
-            this.comboBox3.Location = new System.Drawing.Point(600, 83);
-            this.comboBox3.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.comboBox3.Name = "comboBox3";
-            this.comboBox3.Size = new System.Drawing.Size(141, 23);
-            this.comboBox3.TabIndex = 10;
+            this.playerBindingSource.DataSource = typeof(ScoreTrend.player);
+            // 
+            // pbxPlayer
+            // 
+            this.pbxPlayer.Location = new System.Drawing.Point(70, 195);
+            this.pbxPlayer.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.pbxPlayer.Name = "pbxPlayer";
+            this.pbxPlayer.Size = new System.Drawing.Size(173, 201);
+            this.pbxPlayer.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pbxPlayer.TabIndex = 4;
+            this.pbxPlayer.TabStop = false;
+            // 
+            // btnDashExit
+            // 
+            this.btnDashExit.Location = new System.Drawing.Point(632, 464);
+            this.btnDashExit.Name = "btnDashExit";
+            this.btnDashExit.Size = new System.Drawing.Size(109, 32);
+            this.btnDashExit.TabIndex = 11;
+            this.btnDashExit.Text = "Exit";
+            this.btnDashExit.UseVisualStyleBackColor = true;
+            this.btnDashExit.Click += new System.EventHandler(this.btnDashExit_Click);
+            // 
+            // cboLeagues
+            // 
+            this.cboLeagues.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.leagueBindingSource, "name", true));
+            this.cboLeagues.DataSource = this.leagueBindingSource;
+            this.cboLeagues.DisplayMember = "name";
+            this.cboLeagues.FormattingEnabled = true;
+            this.cboLeagues.Location = new System.Drawing.Point(139, 82);
+            this.cboLeagues.Name = "cboLeagues";
+            this.cboLeagues.Size = new System.Drawing.Size(143, 23);
+            this.cboLeagues.TabIndex = 12;
+            this.cboLeagues.ValueMember = "name";
+            this.cboLeagues.SelectedIndexChanged += new System.EventHandler(this.cboLeagues_SelectedIndexChanged);
+            // 
+            // leagueBindingSource
+            // 
+            this.leagueBindingSource.DataSource = typeof(ScoreTrend.league);
+            // 
+            // cboTeam
+            // 
+            this.cboTeam.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.teamBindingSource, "name", true));
+            this.cboTeam.DataSource = this.teamBindingSource;
+            this.cboTeam.DisplayMember = "name";
+            this.cboTeam.FormattingEnabled = true;
+            this.cboTeam.Location = new System.Drawing.Point(367, 82);
+            this.cboTeam.Name = "cboTeam";
+            this.cboTeam.Size = new System.Drawing.Size(151, 23);
+            this.cboTeam.TabIndex = 13;
+            this.cboTeam.ValueMember = "name";
+            this.cboTeam.Visible = false;
             // 
             // Dashboard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(757, 508);
-            this.Controls.Add(this.comboBox3);
-            this.Controls.Add(this.comboBox2);
-            this.Controls.Add(this.comboBox1);
+            this.ClientSize = new System.Drawing.Size(761, 516);
+            this.Controls.Add(this.cboTeam);
+            this.Controls.Add(this.cboLeagues);
+            this.Controls.Add(this.btnDashExit);
+            this.Controls.Add(this.cboPlayer);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.pictureBox1);
+            this.Controls.Add(this.pbxPlayer);
             this.Controls.Add(this.lblTitleDesc);
             this.Controls.Add(this.lblTitle);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.Name = "Dashboard";
             this.Text = "ScoreTrend Dashboard";
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.Load += new System.EventHandler(this.Dashboard_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.teamBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.playerBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbxPlayer)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.leagueBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -159,12 +209,16 @@
 
         private System.Windows.Forms.Label lblTitle;
         private System.Windows.Forms.Label lblTitleDesc;
-        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.PictureBox pbxPlayer;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.ComboBox comboBox2;
-        private System.Windows.Forms.ComboBox comboBox3;
+        private System.Windows.Forms.ComboBox cboPlayer;
+        private System.Windows.Forms.Button btnDashExit;
+        private System.Windows.Forms.ComboBox cboLeagues;
+        private System.Windows.Forms.BindingSource leagueBindingSource;
+        private System.Windows.Forms.BindingSource teamBindingSource;
+        private System.Windows.Forms.BindingSource playerBindingSource;
+        private System.Windows.Forms.ComboBox cboTeam;
     }
 }
