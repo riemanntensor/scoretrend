@@ -34,18 +34,15 @@
             this.lblTitleDesc = new System.Windows.Forms.Label();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.newPlayerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.newTeamToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.newUserToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitScoreTrendToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.viewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.lblInstructions = new System.Windows.Forms.Label();
             this.lblUsername = new System.Windows.Forms.Label();
             this.lblPassword = new System.Windows.Forms.Label();
             this.txtUsername = new System.Windows.Forms.TextBox();
+            this.userBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.txtPassword = new System.Windows.Forms.TextBox();
             this.btnLogin = new System.Windows.Forms.Button();
             this.lblNewUser = new System.Windows.Forms.Label();
@@ -54,7 +51,7 @@
             this.btnExit = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.lblErrorLogin = new System.Windows.Forms.Label();
-            this.userBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.aboutScoreTrendToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.userBindingSource)).BeginInit();
@@ -69,7 +66,6 @@
             this.lblTitle.Size = new System.Drawing.Size(189, 35);
             this.lblTitle.TabIndex = 0;
             this.lblTitle.Text = "ScoreTrend";
-            this.lblTitle.Click += new System.EventHandler(this.lblTitle_Click);
             // 
             // lblTitleDesc
             // 
@@ -86,8 +82,7 @@
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
             this.viewToolStripMenuItem,
-            this.aboutToolStripMenuItem,
-            this.helpToolStripMenuItem});
+            this.aboutToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(663, 24);
@@ -97,31 +92,10 @@
             // fileToolStripMenuItem
             // 
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.newPlayerToolStripMenuItem,
-            this.newTeamToolStripMenuItem,
-            this.newUserToolStripMenuItem,
             this.exitScoreTrendToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
             this.fileToolStripMenuItem.Text = "File";
-            // 
-            // newPlayerToolStripMenuItem
-            // 
-            this.newPlayerToolStripMenuItem.Name = "newPlayerToolStripMenuItem";
-            this.newPlayerToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
-            this.newPlayerToolStripMenuItem.Text = "New Player";
-            // 
-            // newTeamToolStripMenuItem
-            // 
-            this.newTeamToolStripMenuItem.Name = "newTeamToolStripMenuItem";
-            this.newTeamToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
-            this.newTeamToolStripMenuItem.Text = "New Team";
-            // 
-            // newUserToolStripMenuItem
-            // 
-            this.newUserToolStripMenuItem.Name = "newUserToolStripMenuItem";
-            this.newUserToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
-            this.newUserToolStripMenuItem.Text = "New User";
             // 
             // exitScoreTrendToolStripMenuItem
             // 
@@ -138,15 +112,12 @@
             // 
             // aboutToolStripMenuItem
             // 
+            this.aboutToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.aboutScoreTrendToolStripMenuItem});
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
             this.aboutToolStripMenuItem.Size = new System.Drawing.Size(52, 20);
             this.aboutToolStripMenuItem.Text = "About";
-            // 
-            // helpToolStripMenuItem
-            // 
-            this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
-            this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
-            this.helpToolStripMenuItem.Text = "Help";
+            this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
             // pictureBox1
             // 
@@ -191,6 +162,10 @@
             this.txtUsername.Name = "txtUsername";
             this.txtUsername.Size = new System.Drawing.Size(100, 20);
             this.txtUsername.TabIndex = 7;
+            // 
+            // userBindingSource
+            // 
+            this.userBindingSource.DataSource = typeof(ScoreTrend.user);
             // 
             // txtPassword
             // 
@@ -267,13 +242,16 @@
             this.lblErrorLogin.ForeColor = System.Drawing.Color.Red;
             this.lblErrorLogin.Location = new System.Drawing.Point(55, 410);
             this.lblErrorLogin.Name = "lblErrorLogin";
-            this.lblErrorLogin.Size = new System.Drawing.Size(201, 78);
+            this.lblErrorLogin.Size = new System.Drawing.Size(0, 13);
             this.lblErrorLogin.TabIndex = 16;
-            this.lblErrorLogin.Text = resources.GetString("lblErrorLogin.Text");
+            this.lblErrorLogin.Visible = false;
             // 
-            // userBindingSource
+            // aboutScoreTrendToolStripMenuItem
             // 
-            this.userBindingSource.DataSource = typeof(ScoreTrend.user);
+            this.aboutScoreTrendToolStripMenuItem.Name = "aboutScoreTrendToolStripMenuItem";
+            this.aboutScoreTrendToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
+            this.aboutScoreTrendToolStripMenuItem.Text = "About ScoreTrend";
+            this.aboutScoreTrendToolStripMenuItem.Click += new System.EventHandler(this.aboutScoreTrendToolStripMenuItem_Click);
             // 
             // Login
             // 
@@ -316,7 +294,6 @@
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem viewToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label lblInstructions;
         private System.Windows.Forms.Label lblUsername;
@@ -326,15 +303,13 @@
         private System.Windows.Forms.Button btnLogin;
         private System.Windows.Forms.Label lblNewUser;
         private System.Windows.Forms.LinkLabel lnkStartNewUser;
-        private System.Windows.Forms.ToolStripMenuItem newPlayerToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem newTeamToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem newUserToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem exitScoreTrendToolStripMenuItem;
         private System.Windows.Forms.Label lblLine;
         private System.Windows.Forms.Button btnExit;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label lblErrorLogin;
         private System.Windows.Forms.BindingSource userBindingSource;
+        private System.Windows.Forms.ToolStripMenuItem aboutScoreTrendToolStripMenuItem;
     }
 }
 

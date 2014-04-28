@@ -12,41 +12,95 @@ namespace ScoreTrend
 {
     public partial class Login : Form
     {
-        string username = "";
-        string password = "";
+        private string username = "";
+        private string password = "";
+       
+
         public Login()
         {
             InitializeComponent();
         }
 
-        private void lblTitle_Click(object sender, EventArgs e)
+        public string CurrentUsername
         {
-
+            get
+            {
+                return username;
+            }
+            set
+            {
+                username = value;
+            }
         }
 
-        private void btnLogin_Click(object sender, EventArgs e)
+        public override string ToString()
         {
-            Boolean approved = false;
-            username = txtUsername.Text;
-            password = txtPassword.Text;
-            
-            approved =  UserValidate.validate(password);
+            return username;
+        }
 
-            if (approved == true)
-                {                    
+        
+        private void btnLogin_Click(object sender, EventArgs e) //login button takes username and password
+        {
+
+            if (txtUsername.Text == "")
+            {
+                MessageBox.Show("Please enter user name");
+                this.txtUsername.Focus();
+                return;
+            }
+            else if(txtPassword.Text == "")
+            {
+                MessageBox.Show("Please enter password");
+                this.txtPassword.Focus();
+                return;
+            }
+                else
+                {
+                    username = txtUsername.Text;
+                    password = txtPassword.Text;
+                }   
+
+            try
+            {
+                var queryUserName = from users in context.users where users.username == username select username;
+                isUserNameCorrect = Convert.ToString(queryUserName);
+
+                var queryPassword = from users in context.users where users.password == password select password;
+                isUserPasswordCorrect = Convert.ToString(queryPassword);
+
+                if (isUserNameCorrect.Equals(username, StringComparison.OrdinalIgnoreCase))
+                {
+                    if (isUserPasswordCorrect.Equals(password, StringComparison.Ordinal))
+                    {
+                        this.CurrentUsername = username;
+                        Dashboard session = new Dashboard();
+                        session.Show();
+                        this.Hide();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Please enter correct password");
+                        this.txtPassword.Focus();
+                        return;
+                    }
+                }
+                else
+                {
+                    this.CurrentUsername = username;
                     Dashboard session = new Dashboard();
                     session.Show();
                     this.Hide();
                 }
-            else
-                {
-                    lblErrorLogin.Visible = true;
-                    lblErrorLogin.Text = "***You cannot use spaces or special characters***";
-                    txtUsername.Clear();
-                    txtPassword.Clear();
-                    txtUsername.Focus();
-                }
-                       
+
+
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show("Cannot communicate with database. Application will now close." + ex.Message);
+                Application.Exit();
+            }
+            
+           
             
         }
 
@@ -75,5 +129,25 @@ namespace ScoreTrend
                 Application.Exit();
             }
         }
+        private string isUserNameCorrect;
+        private string isUserPasswordCorrect;
+        public ScoreTrendDataClassesDataContext context = new ScoreTrendDataClassesDataContext();
+
+        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void aboutScoreTrendToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("ScoreTrend is a ScoreCard Database Program designed to store player statistics");
+        }
+
+        private void newUserToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+
     }
 }

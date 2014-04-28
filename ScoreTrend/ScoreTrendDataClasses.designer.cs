@@ -36,12 +36,12 @@ namespace ScoreTrend
     partial void Insertplayer(player instance);
     partial void Updateplayer(player instance);
     partial void Deleteplayer(player instance);
-    partial void Insertstatistic(statistic instance);
-    partial void Updatestatistic(statistic instance);
-    partial void Deletestatistic(statistic instance);
     partial void Insertteam(team instance);
     partial void Updateteam(team instance);
     partial void Deleteteam(team instance);
+    partial void Insertstatistic(statistic instance);
+    partial void Updatestatistic(statistic instance);
+    partial void Deletestatistic(statistic instance);
     partial void Insertuser(user instance);
     partial void Updateuser(user instance);
     partial void Deleteuser(user instance);
@@ -93,19 +93,19 @@ namespace ScoreTrend
 			}
 		}
 		
-		public System.Data.Linq.Table<statistic> statistics
-		{
-			get
-			{
-				return this.GetTable<statistic>();
-			}
-		}
-		
 		public System.Data.Linq.Table<team> teams
 		{
 			get
 			{
 				return this.GetTable<team>();
+			}
+		}
+		
+		public System.Data.Linq.Table<statistic> statistics
+		{
+			get
+			{
+				return this.GetTable<statistic>();
 			}
 		}
 		
@@ -132,9 +132,9 @@ namespace ScoreTrend
 		
 		private string _state;
 		
-		private EntitySet<user> _users;
-		
 		private EntitySet<team> _teams;
+		
+		private EntitySet<user> _users;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -152,8 +152,8 @@ namespace ScoreTrend
 		
 		public league()
 		{
-			this._users = new EntitySet<user>(new Action<user>(this.attach_users), new Action<user>(this.detach_users));
 			this._teams = new EntitySet<team>(new Action<team>(this.attach_teams), new Action<team>(this.detach_teams));
+			this._users = new EntitySet<user>(new Action<user>(this.attach_users), new Action<user>(this.detach_users));
 			OnCreated();
 		}
 		
@@ -237,19 +237,6 @@ namespace ScoreTrend
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="league_user", Storage="_users", ThisKey="leagueid", OtherKey="leagueid")]
-		public EntitySet<user> users
-		{
-			get
-			{
-				return this._users;
-			}
-			set
-			{
-				this._users.Assign(value);
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="league_team", Storage="_teams", ThisKey="leagueid", OtherKey="leagueid")]
 		public EntitySet<team> teams
 		{
@@ -260,6 +247,19 @@ namespace ScoreTrend
 			set
 			{
 				this._teams.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="league_user", Storage="_users", ThisKey="leagueid", OtherKey="leagueid")]
+		public EntitySet<user> users
+		{
+			get
+			{
+				return this._users;
+			}
+			set
+			{
+				this._users.Assign(value);
 			}
 		}
 		
@@ -283,18 +283,6 @@ namespace ScoreTrend
 			}
 		}
 		
-		private void attach_users(user entity)
-		{
-			this.SendPropertyChanging();
-			entity.league = this;
-		}
-		
-		private void detach_users(user entity)
-		{
-			this.SendPropertyChanging();
-			entity.league = null;
-		}
-		
 		private void attach_teams(team entity)
 		{
 			this.SendPropertyChanging();
@@ -302,6 +290,18 @@ namespace ScoreTrend
 		}
 		
 		private void detach_teams(team entity)
+		{
+			this.SendPropertyChanging();
+			entity.league = null;
+		}
+		
+		private void attach_users(user entity)
+		{
+			this.SendPropertyChanging();
+			entity.league = this;
+		}
+		
+		private void detach_users(user entity)
 		{
 			this.SendPropertyChanging();
 			entity.league = null;
@@ -322,9 +322,9 @@ namespace ScoreTrend
 		
 		private int _playerid;
 		
-		private EntityRef<user> _users;
+		private EntitySet<statistic> _statistics;
 		
-		private EntityRef<statistic> _statistics;
+		private EntitySet<user> _users;
 		
 		private EntityRef<team> _team;
 		
@@ -344,8 +344,8 @@ namespace ScoreTrend
 		
 		public player()
 		{
-			this._users = default(EntityRef<user>);
-			this._statistics = default(EntityRef<statistic>);
+			this._statistics = new EntitySet<statistic>(new Action<statistic>(this.attach_statistics), new Action<statistic>(this.detach_statistics));
+			this._users = new EntitySet<user>(new Action<user>(this.attach_users), new Action<user>(this.detach_users));
 			this._team = default(EntityRef<team>);
 			OnCreated();
 		}
@@ -434,61 +434,29 @@ namespace ScoreTrend
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="player_user", Storage="_users", ThisKey="playerid", OtherKey="playerid", IsUnique=true, IsForeignKey=false)]
-		public user users
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="player_statistic", Storage="_statistics", ThisKey="playerid", OtherKey="playerid")]
+		public EntitySet<statistic> statistics
 		{
 			get
 			{
-				return this._users.Entity;
+				return this._statistics;
 			}
 			set
 			{
-				user previousValue = this._users.Entity;
-				if (((previousValue != value) 
-							|| (this._users.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._users.Entity = null;
-						previousValue.player = null;
-					}
-					this._users.Entity = value;
-					if ((value != null))
-					{
-						value.player = this;
-					}
-					this.SendPropertyChanged("users");
-				}
+				this._statistics.Assign(value);
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="player_statistic", Storage="_statistics", ThisKey="playerid", OtherKey="playerid", IsUnique=true, IsForeignKey=false)]
-		public statistic statistics
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="player_user", Storage="_users", ThisKey="playerid", OtherKey="playerid")]
+		public EntitySet<user> users
 		{
 			get
 			{
-				return this._statistics.Entity;
+				return this._users;
 			}
 			set
 			{
-				statistic previousValue = this._statistics.Entity;
-				if (((previousValue != value) 
-							|| (this._statistics.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._statistics.Entity = null;
-						previousValue.player = null;
-					}
-					this._statistics.Entity = value;
-					if ((value != null))
-					{
-						value.player = this;
-					}
-					this.SendPropertyChanged("statistics");
-				}
+				this._users.Assign(value);
 			}
 		}
 		
@@ -545,132 +513,29 @@ namespace ScoreTrend
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
 		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.[statistics]")]
-	public partial class statistic : INotifyPropertyChanging, INotifyPropertyChanged
-	{
 		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _playerid;
-		
-		private System.Nullable<int> _runs;
-		
-		private EntityRef<player> _player;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnplayeridChanging(int value);
-    partial void OnplayeridChanged();
-    partial void OnrunsChanging(System.Nullable<int> value);
-    partial void OnrunsChanged();
-    #endregion
-		
-		public statistic()
+		private void attach_statistics(statistic entity)
 		{
-			this._player = default(EntityRef<player>);
-			OnCreated();
+			this.SendPropertyChanging();
+			entity.player = this;
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_playerid", DbType="Int NOT NULL", IsPrimaryKey=true)]
-		public int playerid
+		private void detach_statistics(statistic entity)
 		{
-			get
-			{
-				return this._playerid;
-			}
-			set
-			{
-				if ((this._playerid != value))
-				{
-					if (this._player.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnplayeridChanging(value);
-					this.SendPropertyChanging();
-					this._playerid = value;
-					this.SendPropertyChanged("playerid");
-					this.OnplayeridChanged();
-				}
-			}
+			this.SendPropertyChanging();
+			entity.player = null;
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_runs", DbType="Int")]
-		public System.Nullable<int> runs
+		private void attach_users(user entity)
 		{
-			get
-			{
-				return this._runs;
-			}
-			set
-			{
-				if ((this._runs != value))
-				{
-					this.OnrunsChanging(value);
-					this.SendPropertyChanging();
-					this._runs = value;
-					this.SendPropertyChanged("runs");
-					this.OnrunsChanged();
-				}
-			}
+			this.SendPropertyChanging();
+			entity.player = this;
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="player_statistic", Storage="_player", ThisKey="playerid", OtherKey="playerid", IsForeignKey=true)]
-		public player player
+		private void detach_users(user entity)
 		{
-			get
-			{
-				return this._player.Entity;
-			}
-			set
-			{
-				player previousValue = this._player.Entity;
-				if (((previousValue != value) 
-							|| (this._player.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._player.Entity = null;
-						previousValue.statistics = null;
-					}
-					this._player.Entity = value;
-					if ((value != null))
-					{
-						value.statistics = this;
-						this._playerid = value.playerid;
-					}
-					else
-					{
-						this._playerid = default(int);
-					}
-					this.SendPropertyChanged("player");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
+			this.SendPropertyChanging();
+			entity.player = null;
 		}
 	}
 	
@@ -853,6 +718,229 @@ namespace ScoreTrend
 		}
 	}
 	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.[statistics]")]
+	public partial class statistic : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _playerid;
+		
+		private System.Nullable<int> _runs;
+		
+		private System.Nullable<int> _strikeouts;
+		
+		private System.Nullable<int> _batAvg;
+		
+		private System.Nullable<int> _hits;
+		
+		private System.Data.Linq.Binary _playerPhoto;
+		
+		private EntityRef<player> _player;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnplayeridChanging(int value);
+    partial void OnplayeridChanged();
+    partial void OnrunsChanging(System.Nullable<int> value);
+    partial void OnrunsChanged();
+    partial void OnstrikeoutsChanging(System.Nullable<int> value);
+    partial void OnstrikeoutsChanged();
+    partial void OnbatAvgChanging(System.Nullable<int> value);
+    partial void OnbatAvgChanged();
+    partial void OnhitsChanging(System.Nullable<int> value);
+    partial void OnhitsChanged();
+    partial void OnplayerPhotoChanging(System.Data.Linq.Binary value);
+    partial void OnplayerPhotoChanged();
+    #endregion
+		
+		public statistic()
+		{
+			this._player = default(EntityRef<player>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_playerid", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int playerid
+		{
+			get
+			{
+				return this._playerid;
+			}
+			set
+			{
+				if ((this._playerid != value))
+				{
+					if (this._player.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnplayeridChanging(value);
+					this.SendPropertyChanging();
+					this._playerid = value;
+					this.SendPropertyChanged("playerid");
+					this.OnplayeridChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_runs", DbType="Int")]
+		public System.Nullable<int> runs
+		{
+			get
+			{
+				return this._runs;
+			}
+			set
+			{
+				if ((this._runs != value))
+				{
+					this.OnrunsChanging(value);
+					this.SendPropertyChanging();
+					this._runs = value;
+					this.SendPropertyChanged("runs");
+					this.OnrunsChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_strikeouts", DbType="Int")]
+		public System.Nullable<int> strikeouts
+		{
+			get
+			{
+				return this._strikeouts;
+			}
+			set
+			{
+				if ((this._strikeouts != value))
+				{
+					this.OnstrikeoutsChanging(value);
+					this.SendPropertyChanging();
+					this._strikeouts = value;
+					this.SendPropertyChanged("strikeouts");
+					this.OnstrikeoutsChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_batAvg", DbType="Int")]
+		public System.Nullable<int> batAvg
+		{
+			get
+			{
+				return this._batAvg;
+			}
+			set
+			{
+				if ((this._batAvg != value))
+				{
+					this.OnbatAvgChanging(value);
+					this.SendPropertyChanging();
+					this._batAvg = value;
+					this.SendPropertyChanged("batAvg");
+					this.OnbatAvgChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_hits", DbType="Int")]
+		public System.Nullable<int> hits
+		{
+			get
+			{
+				return this._hits;
+			}
+			set
+			{
+				if ((this._hits != value))
+				{
+					this.OnhitsChanging(value);
+					this.SendPropertyChanging();
+					this._hits = value;
+					this.SendPropertyChanged("hits");
+					this.OnhitsChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_playerPhoto", DbType="Image", UpdateCheck=UpdateCheck.Never)]
+		public System.Data.Linq.Binary playerPhoto
+		{
+			get
+			{
+				return this._playerPhoto;
+			}
+			set
+			{
+				if ((this._playerPhoto != value))
+				{
+					this.OnplayerPhotoChanging(value);
+					this.SendPropertyChanging();
+					this._playerPhoto = value;
+					this.SendPropertyChanged("playerPhoto");
+					this.OnplayerPhotoChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="player_statistic", Storage="_player", ThisKey="playerid", OtherKey="playerid", IsForeignKey=true)]
+		public player player
+		{
+			get
+			{
+				return this._player.Entity;
+			}
+			set
+			{
+				player previousValue = this._player.Entity;
+				if (((previousValue != value) 
+							|| (this._player.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._player.Entity = null;
+						previousValue.statistics.Remove(this);
+					}
+					this._player.Entity = value;
+					if ((value != null))
+					{
+						value.statistics.Add(this);
+						this._playerid = value.playerid;
+					}
+					else
+					{
+						this._playerid = default(int);
+					}
+					this.SendPropertyChanged("player");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.users")]
 	public partial class user : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -871,9 +959,15 @@ namespace ScoreTrend
 		
 		private int _userid;
 		
-		private EntityRef<league> _league;
+		private string _firstname;
+		
+		private string _lastname;
+		
+		private System.Nullable<int> _authorized;
 		
 		private EntityRef<player> _player;
+		
+		private EntityRef<league> _league;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -891,12 +985,18 @@ namespace ScoreTrend
     partial void OnplayeridChanged();
     partial void OnuseridChanging(int value);
     partial void OnuseridChanged();
+    partial void OnfirstnameChanging(string value);
+    partial void OnfirstnameChanged();
+    partial void OnlastnameChanging(string value);
+    partial void OnlastnameChanged();
+    partial void OnauthorizedChanging(System.Nullable<int> value);
+    partial void OnauthorizedChanged();
     #endregion
 		
 		public user()
 		{
-			this._league = default(EntityRef<league>);
 			this._player = default(EntityRef<player>);
+			this._league = default(EntityRef<league>);
 			OnCreated();
 		}
 		
@@ -1028,6 +1128,100 @@ namespace ScoreTrend
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_firstname", DbType="NVarChar(15)")]
+		public string firstname
+		{
+			get
+			{
+				return this._firstname;
+			}
+			set
+			{
+				if ((this._firstname != value))
+				{
+					this.OnfirstnameChanging(value);
+					this.SendPropertyChanging();
+					this._firstname = value;
+					this.SendPropertyChanged("firstname");
+					this.OnfirstnameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_lastname", DbType="NVarChar(15)")]
+		public string lastname
+		{
+			get
+			{
+				return this._lastname;
+			}
+			set
+			{
+				if ((this._lastname != value))
+				{
+					this.OnlastnameChanging(value);
+					this.SendPropertyChanging();
+					this._lastname = value;
+					this.SendPropertyChanged("lastname");
+					this.OnlastnameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_authorized", DbType="Int")]
+		public System.Nullable<int> authorized
+		{
+			get
+			{
+				return this._authorized;
+			}
+			set
+			{
+				if ((this._authorized != value))
+				{
+					this.OnauthorizedChanging(value);
+					this.SendPropertyChanging();
+					this._authorized = value;
+					this.SendPropertyChanged("authorized");
+					this.OnauthorizedChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="player_user", Storage="_player", ThisKey="playerid", OtherKey="playerid", IsForeignKey=true)]
+		public player player
+		{
+			get
+			{
+				return this._player.Entity;
+			}
+			set
+			{
+				player previousValue = this._player.Entity;
+				if (((previousValue != value) 
+							|| (this._player.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._player.Entity = null;
+						previousValue.users.Remove(this);
+					}
+					this._player.Entity = value;
+					if ((value != null))
+					{
+						value.users.Add(this);
+						this._playerid = value.playerid;
+					}
+					else
+					{
+						this._playerid = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("player");
+				}
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="league_user", Storage="_league", ThisKey="leagueid", OtherKey="leagueid", IsForeignKey=true)]
 		public league league
 		{
@@ -1058,40 +1252,6 @@ namespace ScoreTrend
 						this._leagueid = default(Nullable<int>);
 					}
 					this.SendPropertyChanged("league");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="player_user", Storage="_player", ThisKey="playerid", OtherKey="playerid", IsForeignKey=true)]
-		public player player
-		{
-			get
-			{
-				return this._player.Entity;
-			}
-			set
-			{
-				player previousValue = this._player.Entity;
-				if (((previousValue != value) 
-							|| (this._player.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._player.Entity = null;
-						previousValue.users = null;
-					}
-					this._player.Entity = value;
-					if ((value != null))
-					{
-						value.users = this;
-						this._playerid = value.playerid;
-					}
-					else
-					{
-						this._playerid = default(Nullable<int>);
-					}
-					this.SendPropertyChanged("player");
 				}
 			}
 		}

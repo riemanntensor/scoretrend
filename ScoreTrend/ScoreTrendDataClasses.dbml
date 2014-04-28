@@ -6,8 +6,8 @@
       <Column Name="name" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="city" Type="System.String" DbType="NVarChar(15) NOT NULL" CanBeNull="false" />
       <Column Name="state" Type="System.String" DbType="NVarChar(20) NOT NULL" CanBeNull="false" />
-      <Association Name="league_user" Member="users" ThisKey="leagueid" OtherKey="leagueid" Type="user" />
       <Association Name="league_team" Member="teams" ThisKey="leagueid" OtherKey="leagueid" Type="team" />
+      <Association Name="league_user" Member="users" ThisKey="leagueid" OtherKey="leagueid" Type="user" />
     </Type>
   </Table>
   <Table Name="dbo.players" Member="players">
@@ -16,16 +16,9 @@
       <Column Name="lastname" Type="System.String" DbType="NVarChar(15) NOT NULL" CanBeNull="false" />
       <Column Name="teamid" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="playerid" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Association Name="player_user" Member="users" ThisKey="playerid" OtherKey="playerid" Type="user" Cardinality="One" />
-      <Association Name="player_statistic" Member="statistics" ThisKey="playerid" OtherKey="playerid" Type="statistic" Cardinality="One" />
+      <Association Name="player_statistic" Member="statistics" ThisKey="playerid" OtherKey="playerid" Type="statistic" />
+      <Association Name="player_user" Member="users" ThisKey="playerid" OtherKey="playerid" Type="user" />
       <Association Name="team_player" Member="team" ThisKey="teamid" OtherKey="teamid" Type="team" IsForeignKey="true" />
-    </Type>
-  </Table>
-  <Table Name="dbo.[statistics]" Member="statistics">
-    <Type Name="statistic">
-      <Column Name="playerid" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="runs" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Association Name="player_statistic" Member="player" ThisKey="playerid" OtherKey="playerid" Type="player" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.teams" Member="teams">
@@ -37,6 +30,17 @@
       <Association Name="league_team" Member="league" ThisKey="leagueid" OtherKey="leagueid" Type="league" IsForeignKey="true" />
     </Type>
   </Table>
+  <Table Name="dbo.[statistics]" Member="statistics">
+    <Type Name="statistic">
+      <Column Name="playerid" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="runs" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="strikeouts" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="batAvg" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="hits" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="playerPhoto" Type="System.Data.Linq.Binary" DbType="Image" CanBeNull="true" UpdateCheck="Never" />
+      <Association Name="player_statistic" Member="player" ThisKey="playerid" OtherKey="playerid" Type="player" IsForeignKey="true" />
+    </Type>
+  </Table>
   <Table Name="dbo.users" Member="users">
     <Type Name="user">
       <Column Name="username" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
@@ -45,8 +49,11 @@
       <Column Name="leagueid" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="playerid" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="userid" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Association Name="league_user" Member="league" ThisKey="leagueid" OtherKey="leagueid" Type="league" IsForeignKey="true" />
+      <Column Name="firstname" Type="System.String" DbType="NVarChar(15)" CanBeNull="true" />
+      <Column Name="lastname" Type="System.String" DbType="NVarChar(15)" CanBeNull="true" />
+      <Column Name="authorized" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Association Name="player_user" Member="player" ThisKey="playerid" OtherKey="playerid" Type="player" IsForeignKey="true" />
+      <Association Name="league_user" Member="league" ThisKey="leagueid" OtherKey="leagueid" Type="league" IsForeignKey="true" />
     </Type>
   </Table>
 </Database>

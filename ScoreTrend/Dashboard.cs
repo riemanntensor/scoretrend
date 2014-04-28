@@ -34,10 +34,17 @@ namespace ScoreTrend
 
         private void cboLeagues_SelectedIndexChanged(object sender, EventArgs e)
         {
-            //var fillTeamsByLeague = from c in dbo. where c.leagueid = 1001 select c;
-            this.teamBindingSource.DataSource = context.teams;
+            
+            var selectedLeague = cboLeagues.SelectedValue;
+            int intSelectedLeagueId = Convert.ToInt32(selectedLeague);
+             
+            var querySelectedLeague = from teams in context.teams where teams.leagueid == intSelectedLeagueId select teams;
+            this.teamBindingSource.DataSource = querySelectedLeague;   
+                                                    
             cboTeam.Visible = true;
+                                                   
             this.Refresh();
+
         }
   
 
@@ -50,5 +57,7 @@ namespace ScoreTrend
         public ScoreTrendDataClassesDataContext context = new ScoreTrendDataClassesDataContext();
 
         
+        
     }
+    
 }
